@@ -10,8 +10,8 @@ Application::~Application(){
     delete tex;
 }
 
-bool Application::Update(){
-    return true;
+void Application::Update(){
+    
 }
 
 void Application::Draw(){

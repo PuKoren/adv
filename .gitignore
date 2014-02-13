@@ -14,3 +14,6 @@
 
 # Compiled Dreamcast RomDisk
 *.img
+
+# Compiled Dreamcast binary
+*.elf
