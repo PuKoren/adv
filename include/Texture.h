@@ -2,14 +2,18 @@
 #define _TEXTURE_H
 #include <png/png.h>
 #include <zlib/zlib.h>
+#include "Vector3.h"
 
 class Texture {
 public:
     Texture();
-    Texture(int width, int height);
+    Texture(Vector3 pos, Vector3 size);
     ~Texture();
     void Draw();
 private:
+    void LoadTexture();
     pvr_ptr_t obj_texture;
+    Vector3 loc;
+    Vector3 dim;
 };
 #endif

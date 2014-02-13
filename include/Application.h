@@ -4,6 +4,7 @@
 #include <png/png.h>
 #include <zlib/zlib.h>
 
+#include "Vector3.h"
 #include "GameObject.h"
 #include "Texture.h"
 
@@ -14,6 +15,6 @@ public:
     virtual void Update();
     virtual void Draw();
 private:
-    Texture* tex;
+    Texture tex;
 };
 #endif
