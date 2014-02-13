@@ -4,15 +4,31 @@ Texture::Texture(){
     
 };
 
-Texture::Texture(Vector3 pos, Vector3 size){
-    this->loc = Vector3(pos);
-    this->dim = Vector3(size);
-    this->LoadTexture();
+Texture::Texture(Vector3 pos, Vector3 size, Vector3 screen_size, const char* location){
+    this->loc = pos;
+    this->dim = size;
+    this->screen_size = screen_size;
+    this->LoadTexture(location);
+};
+
+Texture::Texture(Vector3 pos, Vector3 size, const char* location){
+    this->loc = pos;
+    this->dim = size;
+    this->screen_size = size;
+    this->LoadTexture(location);
+};
+
+Texture::Texture(Vector3 pos, Vector3 size, Vector3 screen_size, Texture* tex){
+    this->loc = pos;
+    this->dim = size;
+    this->screen_size = screen_size;
+    this->obj_texture = tex->obj_texture;
 };
 
 Texture::Texture(Vector3 pos, Vector3 size, Texture* tex){
     this->loc = pos;
     this->dim = size;
+    this->screen_size = size;
     this->obj_texture = tex->obj_texture;
 };
 
@@ -25,9 +41,9 @@ void Texture::Move(float x, float y){
     this->loc.Y += y;
 };
 
-void Texture::LoadTexture(){
+void Texture::LoadTexture(const char* location){
     obj_texture = pvr_mem_malloc(this->dim.X * this->dim.Y * 2);
-    png_to_texture("/rd/img.png", obj_texture, PNG_FULL_ALPHA);
+    png_to_texture(location, obj_texture, PNG_FULL_ALPHA);
 };
 
 void Texture::Draw(){
@@ -54,7 +70,7 @@ void Texture::Draw(){
     pvr_prim(&vert, sizeof(vert));
 
     //upper right corner
-    vert.x = this->loc.X + this->dim.X;
+    vert.x = this->loc.X + this->screen_size.X;
     vert.y = this->loc.Y;
     vert.z = 1;
     vert.u = 1.0;
@@ -63,15 +79,15 @@ void Texture::Draw(){
 
     //bottom left corner
     vert.x = this->loc.X;
-    vert.y = this->loc.Y + this->dim.Y;
+    vert.y = this->loc.Y + this->screen_size.Y;
     vert.z = 1;
     vert.u = 0.0;
     vert.v = 1.0;
     pvr_prim(&vert, sizeof(vert));
 
     //bottom right corner
-    vert.x = this->loc.X + this->dim.X;
-    vert.y = this->loc.Y + this->dim.Y;
+    vert.x = this->loc.X + this->screen_size.X;
+    vert.y = this->loc.Y + this->screen_size.Y;
     vert.z = 1;
     vert.u = 1.0;
     vert.v = 1.0;

@@ -15,7 +15,7 @@ public:
     virtual void Update();
     virtual void Draw();
 private:
-    Texture tex;
+    Texture background;
     void Input();
 };
 #endif
