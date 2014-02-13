@@ -3,7 +3,9 @@
 Application::Application(){
     pvr_init_defaults();
     pvr_set_bg_color(1.f, 1.f, 1.f);
-    background = Texture(Vector3(0.f, (512.f - 640.f)/2), Vector3(512, 512), Vector3(640, 640), "/rd/pukogames.png");
+    gs = SPLASHSCREEN;
+    screens.reserve(QUIT);
+    this->LoadScreen();
 }
 
 Application::~Application(){
@@ -23,26 +25,36 @@ void Application::Input(){
 
     if(!state) {
         return;
+    }else{
+        screens[gs]->Input(&gs);
     }
+}
 
-    if(state->buttons & CONT_DPAD_LEFT) {
-    }else if(state->buttons & CONT_DPAD_RIGHT) {
-    }
-
-    if(state->buttons & CONT_DPAD_UP) {
-    }else if(state->buttons & CONT_DPAD_DOWN) {
+void Application::LoadScreen(){
+    if(gs == SPLASHSCREEN){
+        screens[gs] = new SplashScreen();
+    }else if(gs == MENU){
+        screens[gs] = new Menu();
+    }else if(gs == INGAME){
+        //screens[gs] = new Game();
     }
 }
 
 void Application::Update(){
     this->Input();
+    GAME_STATE old_gs = gs;
+    screens[gs]->Update(&gs);
+    if(old_gs != gs){
+        delete screens[old_gs];
+        this->LoadScreen();
+    }
 }
 
 void Application::Draw(){
     pvr_wait_ready();
     pvr_scene_begin();
         pvr_list_begin(PVR_LIST_TR_POLY);
-            background.Draw();
+            screens[gs]->Draw();
         pvr_list_finish();
     pvr_scene_finish();
 }

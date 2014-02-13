@@ -1,0 +1,9 @@
+#ifndef _GAMESTATE_H
+#define _GAMESTATE_H
+enum GAME_STATE{
+	SPLASHSCREEN,
+	MENU,
+	INGAME,
+	QUIT
+};
+#endif
