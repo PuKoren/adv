@@ -10,13 +10,24 @@ Texture::Texture(Vector3 pos, Vector3 size){
     this->LoadTexture();
 };
 
+Texture::Texture(Vector3 pos, Vector3 size, Texture* tex){
+    this->loc = pos;
+    this->dim = size;
+    this->obj_texture = tex->obj_texture;
+};
+
 Texture::~Texture(){
 
 };
 
+void Texture::Move(float x, float y){
+    this->loc.X += x;
+    this->loc.Y += y;
+};
+
 void Texture::LoadTexture(){
     obj_texture = pvr_mem_malloc(this->dim.X * this->dim.Y * 2);
-    png_to_texture("/rd/img.png", obj_texture, PNG_NO_ALPHA);
+    png_to_texture("/rd/img.png", obj_texture, PNG_FULL_ALPHA);
 };
 
 void Texture::Draw(){
@@ -24,7 +35,7 @@ void Texture::Draw(){
     pvr_poly_hdr_t hdr;
     pvr_vertex_t vert;
 
-    pvr_poly_cxt_txr(&cxt, PVR_LIST_OP_POLY, PVR_TXRFMT_RGB565, this->dim.X, this->dim.Y, obj_texture, PVR_FILTER_BILINEAR);
+    pvr_poly_cxt_txr(&cxt, PVR_LIST_TR_POLY, PVR_TXRFMT_ARGB4444, this->dim.X, this->dim.Y, obj_texture, PVR_FILTER_BILINEAR);
     pvr_poly_compile(&hdr, &cxt);
     pvr_prim(&hdr, sizeof(hdr));
 
@@ -35,7 +46,7 @@ void Texture::Draw(){
     //UV MAPPING
     //upper left corner
     vert.x = this->loc.X;
-    vert.y = this->loc.X;
+    vert.y = this->loc.Y;
     vert.z = 1;
     vert.u = 0.0;
     vert.v = 0.0;

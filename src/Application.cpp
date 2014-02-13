@@ -10,13 +10,13 @@ Application::~Application(){
 }
 
 void Application::Update(){
-    
+    tex.Move(1, 0);
 }
 
 void Application::Draw(){
     pvr_wait_ready();
     pvr_scene_begin();
-        pvr_list_begin(PVR_LIST_OP_POLY);
+        pvr_list_begin(PVR_LIST_TR_POLY);
             tex.Draw();
         pvr_list_finish();
     pvr_scene_finish();
