@@ -8,6 +8,7 @@ Texture::Texture(Vector3 pos, Vector3 size, Vector3 screen_size, const char* loc
     this->loc = pos;
     this->dim = size;
     this->screen_size = screen_size;
+    this->alpha = 1.f;
     this->LoadTexture(location);
 };
 
@@ -15,6 +16,7 @@ Texture::Texture(Vector3 pos, Vector3 size, const char* location){
     this->loc = pos;
     this->dim = size;
     this->screen_size = size;
+    this->alpha = 1.f;
     this->LoadTexture(location);
 };
 
@@ -23,6 +25,7 @@ Texture::Texture(Vector3 pos, Vector3 size, Vector3 screen_size, Texture* tex){
     this->dim = size;
     this->screen_size = screen_size;
     this->obj_texture = tex->obj_texture;
+    this->alpha = 1.f;
 };
 
 Texture::Texture(Vector3 pos, Vector3 size, Texture* tex){
@@ -30,10 +33,15 @@ Texture::Texture(Vector3 pos, Vector3 size, Texture* tex){
     this->dim = size;
     this->screen_size = size;
     this->obj_texture = tex->obj_texture;
+    this->alpha = 1.f;
 };
 
 Texture::~Texture(){
+    pvr_mem_free(obj_texture);
+};
 
+void Texture::SetAlpha(float a){
+    this->alpha = a;
 };
 
 void Texture::Move(float x, float y){
@@ -56,7 +64,7 @@ void Texture::Draw(){
     pvr_poly_compile(&hdr, &cxt);
     pvr_prim(&hdr, sizeof(hdr));
 
-    vert.argb = PVR_PACK_COLOR(1.0f, 1.0f, 1.0f, 1.0f);
+    vert.argb = PVR_PACK_COLOR(this->alpha, 1.0f, 1.0f, 1.0f);
     vert.oargb = 0;
     vert.flags = PVR_CMD_VERTEX;
 

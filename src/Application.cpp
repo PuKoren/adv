@@ -2,6 +2,7 @@
 
 Application::Application(){
     pvr_init_defaults();
+    pvr_set_bg_color(1.f, 1.f, 1.f);
     background = Texture(Vector3(0.f, (512.f - 640.f)/2), Vector3(512, 512), Vector3(640, 640), "/rd/pukogames.png");
 }
 
