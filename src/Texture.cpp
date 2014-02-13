@@ -35,6 +35,7 @@ void Texture::Draw(){
     pvr_poly_hdr_t hdr;
     pvr_vertex_t vert;
 
+    //if there is no opacity on the image, use PVR_TXRFMT_RGB565
     pvr_poly_cxt_txr(&cxt, PVR_LIST_TR_POLY, PVR_TXRFMT_ARGB4444, this->dim.X, this->dim.Y, obj_texture, PVR_FILTER_BILINEAR);
     pvr_poly_compile(&hdr, &cxt);
     pvr_prim(&hdr, sizeof(hdr));

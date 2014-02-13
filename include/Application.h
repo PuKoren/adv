@@ -16,5 +16,6 @@ public:
     virtual void Draw();
 private:
     Texture tex;
+    void Input();
 };
 #endif
