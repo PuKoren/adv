@@ -15,13 +15,13 @@ using namespace std;
 class Application{
 public:
     Application();
-    virtual ~Application();
+    ~Application();
     bool Update();
     void Draw();
-    void Input();
 private:
+    void Input();
+    void LoadScreen();
 	GAME_STATE gs;
-	void LoadScreen();
     vector<IGameObject*> screens;
 };
 #endif

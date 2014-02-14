@@ -15,12 +15,16 @@ public:
     void Draw();
     void Move(float x, float y);
     void SetAlpha(float a);
+    void SetRotation(float angle);
+    void Rotate(float angle);
 private:
+    Vector3 GetRotation(Vector3 point);
     void LoadTexture(const char* location);
     pvr_ptr_t obj_texture;
     Vector3 loc;
     Vector3 dim;
     Vector3 screen_size;
     float alpha;
+    float angle;
 };
 #endif

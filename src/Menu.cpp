@@ -1,9 +1,9 @@
 #include "Menu.h"
 
 Menu::Menu(){
-	bg = Texture(Vector3(0.f, -(640.f-512.f)/2), 
-        	Vector3(512, 512), 
-        	Vector3(640, 640), "/rd/wombat.png");
+	bg = Texture(Vector3(0.f, 0.f), 
+        	Vector3(1024, 1024), 
+        	Vector3(640, 480), "/rd/menu_bg.png");
 }
 
 Menu::~Menu(){
@@ -17,7 +17,7 @@ void Menu::Input(GAME_STATE *gs, cont_state_t *state){
 }
 
 void Menu::Update(GAME_STATE *gs){
-
+    bg.Rotate(0.01f);
 }
 
 void Menu::Draw(){

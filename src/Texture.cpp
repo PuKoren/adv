@@ -9,6 +9,7 @@ Texture::Texture(Vector3 pos, Vector3 size, Vector3 screen_size, const char* loc
     this->dim = size;
     this->screen_size = screen_size;
     this->alpha = 1.f;
+    this->angle = 0.f;
     this->LoadTexture(location);
 };
 
@@ -17,6 +18,7 @@ Texture::Texture(Vector3 pos, Vector3 size, const char* location){
     this->dim = size;
     this->screen_size = size;
     this->alpha = 1.f;
+    this->angle = 0.f;
     this->LoadTexture(location);
 };
 
@@ -26,6 +28,7 @@ Texture::Texture(Vector3 pos, Vector3 size, Vector3 screen_size, Texture* tex){
     this->screen_size = screen_size;
     this->obj_texture = tex->obj_texture;
     this->alpha = 1.f;
+    this->angle = 0.f;
 };
 
 Texture::Texture(Vector3 pos, Vector3 size, Texture* tex){
@@ -34,6 +37,7 @@ Texture::Texture(Vector3 pos, Vector3 size, Texture* tex){
     this->screen_size = size;
     this->obj_texture = tex->obj_texture;
     this->alpha = 1.f;
+    this->angle = 0.f;
 };
 
 Texture::~Texture(){
@@ -42,6 +46,14 @@ Texture::~Texture(){
 
 void Texture::SetAlpha(float a){
     this->alpha = a;
+};
+
+void Texture::SetRotation(float angle){
+    this->angle = angle;
+};
+
+void Texture::Rotate(float angle){
+    this->angle += angle;
 };
 
 void Texture::Move(float x, float y){
@@ -75,6 +87,10 @@ void Texture::Draw(){
     vert.z = 1;
     vert.u = 0.0;
     vert.v = 0.0;
+
+    Vector3 rot = GetRotation(Vector3(vert.x, vert.y));
+    vert.x = rot.X;
+    vert.y = rot.Y;
     pvr_prim(&vert, sizeof(vert));
 
     //upper right corner
@@ -83,6 +99,10 @@ void Texture::Draw(){
     vert.z = 1;
     vert.u = 1.0;
     vert.v = 0.0;
+    
+    rot = GetRotation(Vector3(vert.x, vert.y));
+    vert.x = rot.X;
+    vert.y = rot.Y;
     pvr_prim(&vert, sizeof(vert));
 
     //bottom left corner
@@ -91,6 +111,10 @@ void Texture::Draw(){
     vert.z = 1;
     vert.u = 0.0;
     vert.v = 1.0;
+
+    rot = GetRotation(Vector3(vert.x, vert.y));
+    vert.x = rot.X;
+    vert.y = rot.Y;
     pvr_prim(&vert, sizeof(vert));
 
     //bottom right corner
@@ -100,5 +124,30 @@ void Texture::Draw(){
     vert.u = 1.0;
     vert.v = 1.0;
     vert.flags = PVR_CMD_VERTEX_EOL;
+
+    rot = GetRotation(Vector3(vert.x, vert.y));
+    vert.x = rot.X;
+    vert.y = rot.Y;
     pvr_prim(&vert, sizeof(vert));
+};
+
+Vector3 Texture::GetRotation(Vector3 point){
+    float s = sin(angle);
+    float c = cos(angle);
+
+    Vector3 centerPoint((loc.X + screen_size.X)/2, 
+        (loc.Y + screen_size.Y)/2);
+    Vector3 returnPoint;
+    // translate point back to origin:
+    point.X -= centerPoint.X;
+    point.Y -= centerPoint.Y;
+
+    // rotate point
+    float xnew = point.X * c - point.Y * s;
+    float ynew = point.X * s + point.Y * c;
+
+    // translate point back:
+    point.X = xnew + centerPoint.X;
+    point.Y = ynew + centerPoint.Y;
+    return point;
 };
