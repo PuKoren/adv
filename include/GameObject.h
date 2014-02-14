@@ -8,7 +8,8 @@ public:
     virtual ~IGameObject() {};
     virtual void Draw() = 0;
     virtual void Update(GAME_STATE* gs = NULL) = 0;
-    virtual void Input(GAME_STATE* gs = NULL) = 0;
+    virtual void Input(GAME_STATE* gs = NULL, 
+        cont_state_t *state = NULL) = 0;
 };
 
 #endif

@@ -1,5 +1,6 @@
 #ifndef _MENU_H
 #define _MENU_H
+#include <kos.h>
 #include "GameObject.h"
 #include "Texture.h"
 
@@ -9,7 +10,7 @@ public:
 	~Menu();
 	virtual void Update(GAME_STATE *gs);
 	virtual void Draw();
-	virtual void Input(GAME_STATE *gs);
+	virtual void Input(GAME_STATE *gs, cont_state_t *state);
 private:
 	Texture bg;
 };

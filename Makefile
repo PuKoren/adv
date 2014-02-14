@@ -8,7 +8,9 @@ all: rm-elf $(TARGET).elf
 
 include $(KOS_BASE)/Makefile.rules
 
-OBJS = main.o src/Application.o src/Texture.o src/Vector3.o
+OBJS = main.o \
+		src/Application.o src/Texture.o src/Vector3.o \
+		src/SplashScreen.o src/Menu.o
 CFLAGS = -Iinclude
 KOS_LOCAL_CFLAGS = -I$(KOS_BASE)/addons/zlib
 

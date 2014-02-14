@@ -10,8 +10,10 @@ Menu::~Menu(){
 
 }
 
-void Menu::Input(GAME_STATE *gs){
-
+void Menu::Input(GAME_STATE *gs, cont_state_t *state){
+    if(state->buttons & CONT_START){
+        *gs = QUIT;
+    }
 }
 
 void Menu::Update(GAME_STATE *gs){

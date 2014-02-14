@@ -12,13 +12,13 @@
 
 using namespace std;
 
-class Application: public IGameObject{
+class Application{
 public:
     Application();
     virtual ~Application();
-    virtual void Update();
-    virtual void Draw();
-    virtual void Input();
+    bool Update();
+    void Draw();
+    void Input();
 private:
 	GAME_STATE gs;
 	void LoadScreen();

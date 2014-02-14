@@ -13,8 +13,12 @@ SplashScreen::~SplashScreen(){
 
 }
 
-void SplashScreen::Input(GAME_STATE *gs){
-
+void SplashScreen::Input(GAME_STATE *gs, cont_state_t *state){
+	if(state->buttons & CONT_START){
+		if(fadeRate > 0.f){
+			fadeRate = -fadeRate;
+		}
+	}
 }
 
 void SplashScreen::Update(GAME_STATE *gs){

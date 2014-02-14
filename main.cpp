@@ -8,9 +8,7 @@ KOS_INIT_ROMDISK(romdisk_boot);
 
 int main(){
     Application a;
-    bool running = true;
-    while(running){
-        a.Update();
+    while(a.Update()){
         a.Draw();
     }
     return 0;

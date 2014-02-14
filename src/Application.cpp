@@ -26,7 +26,7 @@ void Application::Input(){
     if(!state) {
         return;
     }else{
-        screens[gs]->Input(&gs);
+        screens[gs]->Input(&gs, state);
     }
 }
 
@@ -40,14 +40,18 @@ void Application::LoadScreen(){
     }
 }
 
-void Application::Update(){
+bool Application::Update(){
     this->Input();
     GAME_STATE old_gs = gs;
     screens[gs]->Update(&gs);
     if(old_gs != gs){
         delete screens[old_gs];
+        if(gs == QUIT){
+            return false;
+        }
         this->LoadScreen();
     }
+    return true;
 }
 
 void Application::Draw(){
