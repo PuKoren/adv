@@ -9,7 +9,7 @@ Application::Application(){
 }
 
 Application::~Application(){
-
+    pvr_shutdown();
 }
 
 void Application::Input(){

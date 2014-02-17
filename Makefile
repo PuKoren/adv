@@ -10,7 +10,8 @@ include $(KOS_BASE)/Makefile.rules
 
 OBJS = main.o \
 		src/Application.o src/Texture.o src/Vector3.o \
-		src/SplashScreen.o src/Menu.o
+		src/SplashScreen.o src/Menu.o src/FontManager.o src/Text.o
+
 CFLAGS = -Iinclude
 KOS_LOCAL_CFLAGS = -I$(KOS_BASE)/addons/zlib
 
