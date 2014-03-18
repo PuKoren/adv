@@ -3,33 +3,43 @@
 FontManager* FontManager::_instance = NULL;
 
 FontManager::FontManager(){
-	if(_instance == NULL){
-		_instance = new FontManager();
-		int i = 0;
-		for(i = 0; i < DEFAULT; i++){
-			_instance->font[i] = NULL;
-		}
+	int i = 0;
+	for(i = 0; i <= DEFAULT; i++){
+		font[i] = NULL;
 	}
 }
 
 FontManager::~FontManager(){
 	int i = 0;
 	for(i = 0; i < DEFAULT; i++){
-		delete _instance->font[i];
+		delete font[i];
 	}
-	delete _instance;
+}
+
+FontManager* FontManager::getInstance(){
+	if(_instance){
+		return _instance;
+	}
+	else{
+		_instance = new FontManager();
+		return _instance;
+	}
 }
 
 fntTexFont* FontManager::getFont(FONTS i){
-	if(_instance->font[i] == NULL){
+	if(font[i] == NULL){
 		char tmpbuf[256];
 		sprintf(tmpbuf, "/rd/fonts/%d.txf", i);
-		_instance->font[i] = new fntTexFont(tmpbuf);
+		font[i] = new fntTexFont(tmpbuf);
 	}
-	return _instance->font[i];
+	return font[i];
 }
 
 void FontManager::releaseFont(FONTS i){
-	delete _instance->font[i];
-	_instance->font[i] = NULL;
+	delete font[i];
+	font[i] = NULL;
+}
+
+void FontManager::clear(){
+	delete _instance;
 }

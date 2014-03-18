@@ -12,11 +12,13 @@ class FontManager{
 public:
 	fntTexFont* getFont(FONTS);
 	void releaseFont(FONTS);
+    static FontManager* getInstance();
+    static void clear();
 private:
 	FontManager();
 	~FontManager();
 	static FontManager* _instance;
-    fntTexFont* font[DEFAULT];
+    fntTexFont* font[DEFAULT+1];
 };
 
 #endif

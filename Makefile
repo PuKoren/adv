@@ -12,7 +12,7 @@ OBJS = main.o \
 		src/Application.o src/Texture.o src/Vector3.o \
 		src/SplashScreen.o src/Menu.o src/FontManager.o src/Text.o
 
-CFLAGS = -Iinclude
+CFLAGS = -Iinclude -Wall
 KOS_LOCAL_CFLAGS = -I$(KOS_BASE)/addons/zlib
 
 clean:
@@ -29,7 +29,7 @@ rm-elf:
 	-rm -f romdisk_boot.*
 
 $(TARGET).elf: $(OBJS) romdisk_boot.o 
-	kos-c++ -o $(TARGET).elf $^ $(CFLAGS) -lpng -lz -lm $(KOS_LIBS)
+	kos-c++ -o $(TARGET).elf $^ $(CFLAGS) -lpng -lz -lm -ldcplib $(KOS_LIBS)
 
 romdisk_boot.img:
 	$(KOS_GENROMFS) -f $@ -d romdisk_boot -v

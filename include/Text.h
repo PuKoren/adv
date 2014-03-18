@@ -3,10 +3,12 @@
 
 #include <kos.h>
 #include <dcplib/fnt.h>
+#include <string>
 #include "GameObject.h"
 
 class Text: public IGameObject{
 public:
+    Text();
 	Text(const char*, int, fntTexFont*);
 	~Text();
 	virtual void Update(GAME_STATE *gs);
@@ -14,6 +16,8 @@ public:
 	virtual void Input(GAME_STATE *gs, cont_state_t *state);
 private:
 	fntRenderer* fRenderer;
+    fntTexFont* font;
+    std::string text;
 };
 
 #endif

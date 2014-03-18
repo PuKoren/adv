@@ -1,10 +1,15 @@
 #include "Text.h"
 
-Text::Text(const char* text, int size, fntTexFont* font){
+Text::Text(){
+    fRenderer = NULL;
+}
+
+Text::Text(const char* txt, int size, fntTexFont* font){
     fRenderer = new fntRenderer();
     fRenderer->setFilterMode(0);
     fRenderer->setFont(font);
-    fRenderer->setPointSize(30);
+    fRenderer->setPointSize(size);
+    text = std::string(txt);
 }
 
 Text::~Text(){
@@ -13,8 +18,16 @@ Text::~Text(){
 
 void Text::Draw(){
     fRenderer->begin();
-    //text->setColor(1, 1, 1);
-    //text->start2f(20, y);
-    //text->puts(tmpbuf);
+    fRenderer->setColor(1, 1, 1);
+    fRenderer->start2f(20, 50);
+    fRenderer->puts(text.c_str());
     fRenderer->end();
+}
+
+void Text::Input(GAME_STATE *gs, cont_state_t *state){
+
+}
+
+void Text::Update(GAME_STATE *gs){
+
 }

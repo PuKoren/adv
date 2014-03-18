@@ -3,6 +3,8 @@
 #include <kos.h>
 #include "GameObject.h"
 #include "Texture.h"
+#include "FontManager.h"
+#include "Text.h"
 
 class Menu: public IGameObject{
 public:
@@ -13,6 +15,7 @@ public:
 	virtual void Input(GAME_STATE *gs, cont_state_t *state);
 private:
 	Texture bg;
+    Text txt;
 };
 
 #endif

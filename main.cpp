@@ -1,5 +1,6 @@
 #include <kos.h>
 #include "Application.h"
+#include "FontManager.h"
 
 extern uint8 romdisk_boot[];
 
@@ -11,5 +12,6 @@ int main(){
     while(a.Update()){
         a.Draw();
     }
+    FontManager::clear();
     return 0;
 };
