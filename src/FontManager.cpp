@@ -29,7 +29,7 @@ FontManager* FontManager::getInstance(){
 fntTexFont* FontManager::getFont(FONTS i){
 	if(font[i] == NULL){
 		char tmpbuf[256];
-		sprintf(tmpbuf, "/rd/fonts/%d.txf", i);
+		sprintf(tmpbuf, "/rd/fonts/%i.txf", i);
 		font[i] = new fntTexFont(tmpbuf);
 	}
 	return font[i];

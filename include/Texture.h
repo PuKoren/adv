@@ -26,5 +26,7 @@ private:
     Vector3 screen_size;
     float alpha;
     float angle;
+
+    pvr_poly_hdr_t hdr;
 };
 #endif
