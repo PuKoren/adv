@@ -1,9 +1,7 @@
 #include "Menu.h"
 
 Menu::Menu(){
-	bg = Texture(Vector3(0.f, 0.f), 
-        	Vector3(1024, 1024), 
-        	Vector3(640, 480), "/rd/menu_bg.png");
+	bg = Texture(Vector3(0.f, 0.f), Vector3(1024, 1024), Vector3(640, 480), "/rd/menu_bg.png");
     txt = Text("Menu", 16, FontManager::getInstance()->getFont(DEFAULT));
 }
 

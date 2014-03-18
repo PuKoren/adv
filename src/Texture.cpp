@@ -50,15 +50,14 @@ void Texture::SetAlpha(float a){
 
 void Texture::SetRotation(float angle){
     this->angle = angle;
-};
-
-void Texture::Rotate(float angle){
-    this->angle += angle;
-
     rot[0] = GetRotation(Vector3(this->loc.X, this->loc.Y));
     rot[1] = GetRotation(Vector3(this->loc.X + this->screen_size.X, this->loc.Y));
     rot[2] = GetRotation(Vector3(this->loc.X, this->loc.Y + this->screen_size.Y));
     rot[3] = GetRotation(Vector3(this->loc.X + this->screen_size.X, this->loc.Y + this->screen_size.Y));
+};
+
+void Texture::Rotate(float angle){
+    SetRotation(this->angle + angle);
 };
 
 void Texture::Move(float x, float y){
@@ -75,10 +74,7 @@ void Texture::LoadTexture(const char* location){
     pvr_poly_cxt_txr(&cxt, PVR_LIST_TR_POLY, PVR_TXRFMT_ARGB4444, this->dim.X, this->dim.Y, obj_texture, PVR_FILTER_BILINEAR);
     pvr_poly_compile(&hdr, &cxt);
 
-    rot[0] = GetRotation(Vector3(this->loc.X, this->loc.Y));
-    rot[1] = GetRotation(Vector3(this->loc.X + this->screen_size.X, this->loc.Y));
-    rot[2] = GetRotation(Vector3(this->loc.X, this->loc.Y + this->screen_size.Y));
-    rot[3] = GetRotation(Vector3(this->loc.X + this->screen_size.X, this->loc.Y + this->screen_size.Y));
+    SetRotation(0.f);
 };
 
 void Texture::Draw(){
