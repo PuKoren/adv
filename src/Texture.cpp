@@ -54,6 +54,11 @@ void Texture::SetRotation(float angle){
 
 void Texture::Rotate(float angle){
     this->angle += angle;
+
+    rot[0] = GetRotation(Vector3(this->loc.X, this->loc.Y));
+    rot[1] = GetRotation(Vector3(this->loc.X + this->screen_size.X, this->loc.Y));
+    rot[2] = GetRotation(Vector3(this->loc.X, this->loc.Y + this->screen_size.Y));
+    rot[3] = GetRotation(Vector3(this->loc.X + this->screen_size.X, this->loc.Y + this->screen_size.Y));
 };
 
 void Texture::Move(float x, float y){
@@ -69,6 +74,11 @@ void Texture::LoadTexture(const char* location){
     //if there is no opacity on the image, use PVR_TXRFMT_RGB565
     pvr_poly_cxt_txr(&cxt, PVR_LIST_TR_POLY, PVR_TXRFMT_ARGB4444, this->dim.X, this->dim.Y, obj_texture, PVR_FILTER_BILINEAR);
     pvr_poly_compile(&hdr, &cxt);
+
+    rot[0] = GetRotation(Vector3(this->loc.X, this->loc.Y));
+    rot[1] = GetRotation(Vector3(this->loc.X + this->screen_size.X, this->loc.Y));
+    rot[2] = GetRotation(Vector3(this->loc.X, this->loc.Y + this->screen_size.Y));
+    rot[3] = GetRotation(Vector3(this->loc.X + this->screen_size.X, this->loc.Y + this->screen_size.Y));
 };
 
 void Texture::Draw(){
@@ -87,9 +97,8 @@ void Texture::Draw(){
     vert.u = 0.0;
     vert.v = 0.0;
 
-    Vector3 rot = GetRotation(Vector3(vert.x, vert.y));
-    vert.x = rot.X;
-    vert.y = rot.Y;
+    vert.x = rot[0].X;
+    vert.y = rot[0].Y;
     pvr_prim(&vert, sizeof(vert));
 
     //upper right corner
@@ -99,9 +108,8 @@ void Texture::Draw(){
     vert.u = 1.0;
     vert.v = 0.0;
     
-    rot = GetRotation(Vector3(vert.x, vert.y));
-    vert.x = rot.X;
-    vert.y = rot.Y;
+    vert.x = rot[1].X;
+    vert.y = rot[1].Y;
     pvr_prim(&vert, sizeof(vert));
 
     //bottom left corner
@@ -111,9 +119,8 @@ void Texture::Draw(){
     vert.u = 0.0;
     vert.v = 1.0;
 
-    rot = GetRotation(Vector3(vert.x, vert.y));
-    vert.x = rot.X;
-    vert.y = rot.Y;
+    vert.x = rot[2].X;
+    vert.y = rot[2].Y;
     pvr_prim(&vert, sizeof(vert));
 
     //bottom right corner
@@ -124,9 +131,8 @@ void Texture::Draw(){
     vert.v = 1.0;
     vert.flags = PVR_CMD_VERTEX_EOL;
 
-    rot = GetRotation(Vector3(vert.x, vert.y));
-    vert.x = rot.X;
-    vert.y = rot.Y;
+    vert.x = rot[3].X;
+    vert.y = rot[3].Y;
     pvr_prim(&vert, sizeof(vert));
 };
 
