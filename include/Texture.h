@@ -20,6 +20,7 @@ public:
 private:
     Vector3 GetRotation(Vector3 point);
     void LoadTexture(const char* location);
+    void LoadTexture();
     pvr_ptr_t obj_texture;
     pvr_poly_hdr_t hdr;
 

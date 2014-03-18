@@ -16,7 +16,7 @@ void Menu::Input(GAME_STATE *gs, cont_state_t *state){
 }
 
 void Menu::Update(GAME_STATE *gs){
-    
+
 }
 
 void Menu::Draw(){
