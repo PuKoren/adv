@@ -26,20 +26,22 @@ Texture::Texture(Vector3 pos, Vector3 size, Vector3 screen_size, Texture& tex){
     this->loc = pos;
     this->dim = size;
     this->screen_size = screen_size;
+    //this->obj_texture = tex.obj_texture;
     this->hdr = tex.hdr;
-    this->obj_texture = NULL;
     this->alpha = 1.f;
-    this->angle = 0.f;
+    this->SetRotation(0.f);
+    //this->LoadTexture();
 };
 
 Texture::Texture(Vector3 pos, Vector3 size, Texture& tex){
     this->loc = pos;
     this->dim = size;
     this->screen_size = size;
+    //this->obj_texture = tex.obj_texture;
     this->hdr = tex.hdr;
-    this->obj_texture = NULL;
     this->alpha = 1.f;
-    this->angle = 0.f;
+    this->SetRotation(0.f);
+    //this->LoadTexture();
 };
 
 Texture::~Texture(){
@@ -72,7 +74,7 @@ void Texture::Move(float x, float y){
 };
 
 void Texture::LoadTexture(const char* location){
-    obj_texture = pvr_mem_malloc((this->dim.X * this->dim.Y) *2);
+    obj_texture = pvr_mem_malloc(this->dim.X * this->dim.Y *2);
     png_to_texture(location, obj_texture, PNG_FULL_ALPHA);
 
     pvr_poly_cxt_t cxt;
@@ -102,6 +104,7 @@ void Texture::Draw(){
     pvr_prim(&vert, sizeof(vert));
 
     //upper right corner
+    vert.z = 1;
     vert.u = 1.0;
     vert.v = 0.0;
     
@@ -110,6 +113,7 @@ void Texture::Draw(){
     pvr_prim(&vert, sizeof(vert));
 
     //bottom left corner
+    vert.z = 1;
     vert.u = 0.0;
     vert.v = 1.0;
 
@@ -118,6 +122,7 @@ void Texture::Draw(){
     pvr_prim(&vert, sizeof(vert));
 
     //bottom right corner
+    vert.z = 1;
     vert.u = 1.0;
     vert.v = 1.0;
     vert.flags = PVR_CMD_VERTEX_EOL;

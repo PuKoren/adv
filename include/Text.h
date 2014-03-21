@@ -5,6 +5,7 @@
 #include <dcplib/fnt.h>
 #include <string>
 #include "GameObject.h"
+#include "FontManager.h"
 
 class Text: public IGameObject{
 public:

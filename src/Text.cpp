@@ -5,11 +5,11 @@ Text::Text(){
 }
 
 Text::Text(const char* txt, int size, fntTexFont* font){
-    /*fRenderer = new fntRenderer();
+    fRenderer = new fntRenderer();
     fRenderer->setFilterMode(0);
     fRenderer->setFont(font);
     fRenderer->setPointSize(size);
-    text = std::string(txt);*/
+    text = std::string(txt);
 }
 
 Text::~Text(){
@@ -17,11 +17,11 @@ Text::~Text(){
 }
 
 void Text::Draw(){
-    /*fRenderer->begin();
+    fRenderer->begin();
     fRenderer->setColor(1, 1, 1);
     fRenderer->start2f(20, 50);
     fRenderer->puts(text.c_str());
-    fRenderer->end();*/
+    fRenderer->end();
 }
 
 void Text::Input(GAME_STATE *gs, cont_state_t *state){
