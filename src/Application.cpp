@@ -1,9 +1,8 @@
 #include "Application.h"
 
 Application::Application(){
-    pvr_init_params_t pvrInit = { {PVR_BINSIZE_0, PVR_BINSIZE_0, PVR_BINSIZE_32, PVR_BINSIZE_0, PVR_BINSIZE_0}, 512 * 1024};
-    pvr_init(&pvrInit);
-    pvr_set_bg_color(1.f, 1.f, 1.f);
+    pvr_init_defaults();
+    pvr_set_bg_color(0, 0, 0);
     gs = SPLASHSCREEN;
     screens.reserve(QUIT);
     this->LoadScreen();
@@ -56,7 +55,6 @@ bool Application::Update(){
 }
 
 void Application::Draw(){
-    pvr_set_bg_color(0, 0, 0);
     pvr_wait_ready();
     pvr_scene_begin();
         pvr_list_begin(PVR_LIST_TR_POLY);

@@ -9,8 +9,8 @@ public:
     Texture();
     Texture(Vector3 pos, Vector3 size, const char* location);
     Texture(Vector3 pos, Vector3 size, Vector3 screen_size, const char* location);
-    Texture(Vector3 pos, Vector3 size, Texture* tex);
-    Texture(Vector3 pos, Vector3 size, Vector3 screen_size, Texture* tex);
+    Texture(Vector3 pos, Vector3 size, Texture& tex);
+    Texture(Vector3 pos, Vector3 size, Vector3 screen_size, Texture& tex);
     ~Texture();
     void Draw();
     void Move(float x, float y);
@@ -20,7 +20,6 @@ public:
 private:
     Vector3 GetRotation(Vector3 point);
     void LoadTexture(const char* location);
-    void LoadTexture();
     pvr_ptr_t obj_texture;
     pvr_poly_hdr_t hdr;
 
