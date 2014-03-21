@@ -8,9 +8,14 @@ enum FONTS{
 	DEFAULT
 };
 
+struct FontMemory{
+    fntTexFont* fntPtr;
+    pvr_ptr_t memPtr;
+};
+
 class FontManager{
 public:
-	fntTexFont* getFont(FONTS);
+	FontMemory getFont(FONTS);
 	void releaseFont(FONTS);
     static FontManager* getInstance();
     static void clear();
@@ -18,7 +23,7 @@ private:
 	FontManager();
 	~FontManager();
 	static FontManager* _instance;
-    fntTexFont* font[DEFAULT+1];
+    FontMemory font[DEFAULT+1];
 };
 
 #endif
