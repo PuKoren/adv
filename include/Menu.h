@@ -15,12 +15,6 @@ public:
 	virtual void Input(GAME_STATE *gs, cont_state_t *state);
 private:
 	Texture bg;
-    Texture bg1;
-    Texture bg2;
-    Texture bg3;
-    Texture bg4;
-    Texture bg5;
-    Texture bg6;
     Text txt;
 };
 
