@@ -136,8 +136,8 @@ Vector3 Texture::GetRotation(Vector3 point){
     float s = sin(angle);
     float c = cos(angle);
 
-    Vector3 centerPoint((loc.X + screen_size.X)/2, 
-        (loc.Y + screen_size.Y)/2);
+    Vector3 centerPoint(loc.X + (screen_size.X/2), 
+        (loc.Y + screen_size.Y/2));
     
     // translate point back to origin:
     point.X -= centerPoint.X;
